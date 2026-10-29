@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f1e7">
+  <title>Startup Tarot · OpenUI prototype</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@openuidev/browser-bundle@0.2/dist/openui-styles.css">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f4f1e7;
+      --card: #fffdf7;
+      --ink: #153d32;
+      --muted: #596b63;
+      --line: #d8d4c6;
+      --green: #24614c;
+      --green-soft: #e8efd8;
+      --purple-soft: #f1eaf6;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; }
+    .shell { width: min(100% - 32px, 760px); margin: 32px auto; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
+    .brand { font-weight: 750; font-size: 1.05rem; letter-spacing: -.02em; }
+    .status { color: var(--muted); font-size: .82rem; }
+    h1 { font: 500 clamp(2rem, 7vw, 3rem)/1.05 Georgia, serif; margin: 24px 0 8px; letter-spacing: -.035em; }
+    .intro { margin: 0 0 20px; color: var(--muted); line-height: 1.5; }
+    .scenario { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+    .scenario button { border: 1px solid #b5b5a0; border-radius: 999px; padding: 10px 14px; background: var(--card); color: var(--ink); font: inherit; font-size: .9rem; cursor: pointer; }
+    .scenario button[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: white; }
+    .scenario button:focus-visible { outline: 3px solid #9b7cc0; outline-offset: 2px; }
+    #renderer { min-height: 180px; }
+    .footnote { border-top: 1px solid var(--line); margin-top: 20px; padding-top: 14px; color: var(--muted); font-size: .86rem; line-height: 1.5; }
+    .footnote strong { color: var(--ink); }
+    .load-error { background: #fff2ed; border: 1px solid #bd796b; border-radius: 12px; padding: 14px; }
+    a { color: var(--green); }
+    @media (max-width: 480px) { .shell { width: min(100% - 24px, 760px); margin: 16px auto; } header { align-items: flex-start; flex-direction: column; gap: 4px; } }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div class="brand">Startup Tarot · OpenUI study</div>
+      <div class="status">Fixture mode · no AI or network data</div>
+    </header>
+    <p><a href="chat.html">Open the reference chat →</a></p><h1>One next move</h1>
+    <p class="intro">A small prototype to see whether generated UI can make a recommendation and its evidence easier to scan.</p>
+    <nav class="scenario" aria-label="Choose a sample connection state">
+      <button type="button" data-case="both" aria-pressed="true">Both documented in demo</button>
+      <button type="button" data-case="investor" aria-pressed="false">Investor only</button>
+      <button type="button" data-case="startup" aria-pressed="false">Startup only</button>
+    </nav>
+    <section id="renderer" aria-live="polite" aria-label="Next move and evidence"></section>
+    <p class="footnote"><strong>Evidence rule:</strong> these fictional records and their explicit demo rule are shown only to test presentation. A real investor connection must come from an authored, reviewable source rule. Startup similarity alone does not establish investor interest, funding, endorsement, or causation.</p>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@openuidev/browser-bundle@0.2/dist/openui-bundle.min.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      var activeCase = "both";
+      var root = null;
+      var q = function (value) { return JSON.stringify(value); };
+      var cases = {
+        both: {
+          subtitle: "Fictional matched example · explicit demo rule",
+          investorLabel: "Fictional investor profile",
+          investorName: "Harbor Seed Fund",
+          investorDetail: "This invented profile lists customer learning as an area of interest.",
+          startupLabel: "Fictional startup snapshot",
+          startupName: "ToolShare Local",
+          startupDetail: "This invented snapshot describes a local tool reservation service.",
+          connection: "Why shown together: the fictional demo rule links customer-learning interest to the snapshot’s reservation-test example.",
+          tag: "Demo rule present"
+        },
+        investor: {
+          subtitle: "Investor interest only · no startup snapshot",
+          investorLabel: "Fictional investor profile",
+          investorName: "Harbor Seed Fund",
+          investorDetail: "This invented profile lists customer learning as an area of interest.",
+          startupLabel: "Startup snapshot",
+          startupName: "No snapshot available",
+          startupDetail: "The library has no startup example for this situation.",
+          connection: "No investor-to-startup connection is shown. The profile can be reviewed on its own.",
+          tag: "Partial evidence"
+        },
+        startup: {
+          subtitle: "Startup example only · no investor interest",
+          investorLabel: "Investor profile",
+          investorName: "No matching profile",
+          investorDetail: "The library has no documented investor interest for this situation.",
+          startupLabel: "Fictional startup snapshot",
+          startupName: "ToolShare Local",
+          startupDetail: "This invented snapshot describes a local tool reservation service.",
+          connection: "No investor connection is shown. This example can still inform a founder’s learning question.",
+          tag: "Partial evidence"
+        }
+      };
+
+      function makeProgram(item) {
+        return [
+          "root = Card([status, title, moveText, divider1, investorTitle, investorText, startupTitle, startupText, divider2, connectionTitle, connectionText, limitText])",
+          "status = Tag(" + q(item.tag) + ", null, \"sm\", \"info\")",
+          "title = CardHeader(\"Explore demand with a bounded reservation test\", " + q(item.subtitle) + ")",
+          "moveText = TextContent(\"Offer a small reservation test. Record requests, cancellations, constraints, and a decision to continue, change, or stop.\")",
+          "divider1 = Separator()",
+          "investorTitle = CardHeader(" + q(item.investorLabel) + ")",
+          "investorText = TextContent(" + q(item.investorName + " — " + item.investorDetail) + ")",
+          "startupTitle = CardHeader(" + q(item.startupLabel) + ")",
+          "startupText = TextContent(" + q(item.startupName + " — " + item.startupDetail) + ")",
+          "divider2 = Separator()",
+          "connectionTitle = CardHeader(\"Connection and limits\")",
+          "connectionText = TextContent(" + q(item.connection) + ")",
+          "limitText = TextContent(\"No real organizations or outcomes are represented.\", \"small\")"
+        ].join("\n");
+      }
+
+      function render() {
+        var target = document.getElementById("renderer");
+        if (!window.__OpenUI || !window.__OpenUI.createRoot || !window.__OpenUI.Renderer) {
+          target.innerHTML = "<div class=\"load-error\">The OpenUI renderer did not load. Check your internet connection, then refresh.</div>";
+          return;
+        }
+        if (!root) root = window.__OpenUI.createRoot(target);
+        root.render(window.__OpenUI.React.createElement(window.__OpenUI.Renderer, {
+          response: makeProgram(cases[activeCase]),
+          library: window.__OpenUI.openuiChatLibrary
+        }));
+      }
+
+      document.querySelectorAll("[data-case]").forEach(function (button) {
+        button.addEventListener("click", function () {
+          activeCase = button.dataset.case;
+          document.querySelectorAll("[data-case]").forEach(function (other) {
+            other.setAttribute("aria-pressed", String(other === button));
+          });
+          render();
+        });
+      });
+      render();
+    }());
+  </script>
+</body>
+</html>

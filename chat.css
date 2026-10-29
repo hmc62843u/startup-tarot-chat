@@ -1,0 +1,66 @@
+:root {
+  color-scheme:light dark;
+  --paper:light-dark(#f7f8f7,#151815);--surface:light-dark(#fff,#1b1e1b);
+  --panel:light-dark(#f3f5f3,#242a24);--ink:light-dark(#222622,#e8ede8);
+  --muted:light-dark(#667066,#acb8ac);--line:light-dark(#e1e6e1,#374037);
+  --green:light-dark(#24614c,#b5d2a5);--on-green:light-dark(#fff,#183023);
+  --bubble:light-dark(#222622,#e4eae4);--on-bubble:light-dark(#fff,#1b241b);
+  font:15px/1.55 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:var(--paper);
+}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper)}
+button,input,textarea{font:inherit}
+button{min-height:44px;padding:9px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);cursor:pointer}
+button:hover{background:var(--panel)}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--green);outline-offset:3px}
+button.primary,button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--on-green)}
+button:disabled{cursor:wait;opacity:.55}a{color:var(--green)}[hidden]{display:none!important}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#tarot-chat{height:100dvh;display:grid;grid-template-columns:72px minmax(0,1fr);padding:8px 8px 8px 0}
+.nav-rail{display:flex;align-items:center;flex-direction:column;gap:14px;padding:16px 8px}
+.brand-mark{display:flex;align-items:center;justify-content:center;width:44px;height:44px;flex-shrink:0;background:var(--green);color:var(--on-green);border-radius:50% 50% 50% 8px;font:600 28px/1.3 Georgia,serif;text-decoration:none}
+.rail-button{display:flex;align-items:center;justify-content:center;flex-shrink:0;padding:0;width:44px;height:44px;border:0;border-radius:50%;background:transparent}
+.rail-button span{font:400 28px/1 ui-sans-serif,system-ui,sans-serif}#new-chat{background:var(--bubble);color:var(--on-bubble)}
+.rail-note{margin-top:auto;color:var(--muted);font-size:11px}
+.chat-stage{min-height:0;min-width:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;border:1px solid var(--line);border-radius:24px;background:var(--surface);overflow:hidden}
+.app-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:18px 24px}.app-title{font-weight:600}
+.demo-label,.fine-print{font-size:12px;color:var(--muted)}
+#chat-scroll{min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
+.welcome{min-height:100%;max-width:760px;margin:auto;display:flex;flex-direction:column;justify-content:center;padding:30px 28px 70px;text-align:center}
+.welcome h1{font:500 clamp(26px,4vw,36px)/1.2 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.035em;margin:0 0 14px}
+.welcome p{max-width:540px;margin:0 auto 20px;color:var(--muted)}
+.scenarios{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:8px 0 18px}
+.scenarios button{min-height:54px;text-align:left;font-size:14px;border-radius:14px}.welcome .fine-print{margin:0}
+.messages{display:flex;flex-direction:column;gap:28px;max-width:840px;margin:auto;padding:30px 28px}.messages:empty{display:none}
+.message{min-width:0;overflow-wrap:anywhere}.message.user{align-self:flex-end;max-width:85%;padding:14px 18px;border-radius:22px;background:var(--bubble);color:var(--on-bubble)}
+.message.user p{margin:0;white-space:pre-wrap}.message.assistant{width:100%}
+.speaker{font-size:12px;font-weight:500;color:var(--muted);margin-bottom:10px}
+.followups{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.followups button{font-size:12px;border-radius:999px}
+.stream-status{display:flex;align-items:center;gap:8px;margin:10px 0 0;color:var(--muted);font-size:12px}
+.stream-status[data-state="streaming"]::before{content:"";width:7px;height:7px;flex-shrink:0;border-radius:50%;background:var(--green);animation:stream-pulse 1s ease-in-out infinite}
+.message.assistant[aria-busy="true"] .response{min-height:90px}
+@keyframes stream-pulse{50%{opacity:.35}}@media(prefers-reduced-motion:reduce){.stream-status[data-state="streaming"]::before{animation:none}}
+.composer-wrap{width:100%;max-width:840px;margin:auto;padding:14px 28px 16px;background:var(--surface)}
+.composer{border:1px solid var(--line);border-radius:30px;box-shadow:0 4px 20px light-dark(#14241408,#00000018);padding:6px;background:var(--surface)}
+.composer-row{display:flex;align-items:center;gap:8px}.composer-row input{width:100%;min-width:0;border:0;border-radius:24px;background:transparent;color:var(--ink);padding:12px 14px;min-height:44px}
+.composer-row button{display:flex;align-items:center;justify-content:center;width:44px;height:44px;min-width:44px;padding:0;border-radius:50%}
+#send-message span{font-size:24px}#stop-response span{font-size:16px}.composer-wrap .fine-print{margin:8px 0 0;text-align:center}
+.plan-form{display:grid;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}
+.plan-form h2{font:600 22px/1.25 ui-sans-serif,system-ui,sans-serif;margin:0;letter-spacing:-.025em}
+.plan-form label{display:grid;gap:6px;font-weight:500;font-size:14px}
+.plan-form textarea,.plan-form input{width:100%;min-width:0;min-height:44px;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--surface);color:var(--ink);font-weight:400}
+.plan-form textarea{resize:vertical;min-height:90px}.plan-actions{display:flex;align-items:center;flex-wrap:wrap;gap:12px}
+.render-error{border:1px solid var(--line);padding:12px;border-radius:10px}
+#tarot-chat .openui-card{display:flex;flex-direction:column;gap:14px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:none;width:100%;min-width:0}
+#tarot-chat .openui-header{padding:0;margin:4px 0 0}#tarot-chat .openui-header-top-left{color:var(--ink);font:600 15px/1.4 ui-sans-serif,system-ui,sans-serif}
+#tarot-chat .openui-card > .openui-header:first-child .openui-header-top-left{font:600 22px/1.25 ui-sans-serif,system-ui,sans-serif;letter-spacing:-.025em}
+#tarot-chat .openui-header-bottom{color:var(--muted);font:400 12px/1.5 ui-sans-serif,system-ui,sans-serif;padding-top:8px}
+#tarot-chat .openui-text-content,#tarot-chat .openui-markdown-renderer,#tarot-chat .openui-markdown-renderer p{color:var(--ink);font:400 15px/1.6 ui-sans-serif,system-ui,sans-serif;margin:0}
+#history-dialog{width:min(400px,calc(100% - 24px));max-height:80dvh;overflow:auto;margin:16px auto auto 80px;border:1px solid var(--line);border-radius:20px;padding:20px;background:var(--surface);color:var(--ink)}
+#history-dialog::backdrop{background:#00000030}.history-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.history-heading h2{font-size:20px;font-weight:600;margin:0}
+#history-list{display:grid;gap:10px}.history-item{text-align:left;width:100%}.history-item span{display:block;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}.history-item small{display:block;color:var(--muted);font-size:12px;margin-top:5px}
+@media(max-width:600px){
+  #tarot-chat{grid-template-columns:52px minmax(0,1fr);padding:4px 4px 4px 0}.nav-rail{padding:12px 4px;gap:12px}.brand-mark,.rail-button{width:38px;height:44px}.chat-stage{border-radius:18px}.app-header{padding:14px}.demo-label{font-size:11px}
+  .welcome{padding:20px 14px 30px}.scenarios{grid-template-columns:1fr;gap:8px}.messages{padding:20px 14px;gap:22px}.message.user{max-width:94%;padding:12px 14px}
+  #tarot-chat .openui-card,.plan-form{padding:16px}#tarot-chat .openui-card > .openui-header:first-child .openui-header-top-left{font-size:20px}
+  .composer-wrap{padding:10px 10px 12px}.composer-row{gap:2px}.composer-row input{font-size:16px;padding:10px 8px}.composer-wrap .fine-print{font-size:11px}#history-dialog{margin:12px auto}
+}

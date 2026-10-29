@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#24614c">
+  <title>Startup Tarot Chat</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@openuidev/browser-bundle@0.2.1/dist/openui-styles.css">
+  <link rel="stylesheet" href="chat.css">
+</head>
+<body>
+  <div id="tarot-chat">
+    <nav class="nav-rail" aria-label="Chat navigation">
+      <a class="brand-mark" href="chat.html" aria-label="Startup Tarot home">S.</a>
+      <button id="new-chat" class="rail-button" type="button" aria-label="New chat" title="New chat"><span aria-hidden="true">＋</span></button>
+      <button id="history-toggle" class="rail-button" type="button" aria-label="Chat history" title="Chat history" aria-haspopup="dialog"><span aria-hidden="true">◷</span></button>
+      <span class="rail-note">Demo</span>
+    </nav>
+    <div class="chat-stage">
+      <header class="app-header"><span class="app-title">Startup Tarot</span><span class="demo-label">Fictional records · Demo stream</span></header>
+      <main id="chat-scroll" aria-label="Chat workspace">
+      <section class="welcome" aria-labelledby="welcome-title">
+        <h1 id="welcome-title">What would you like to explore?</h1>
+        <p>Explore a fictional marketplace at the idea stage, testing demand. Choose which evidence is available.</p>
+        <div class="scenarios" aria-label="Choose a fictional evidence case">
+          <button type="button" data-scenario="both">Both connected</button>
+          <button type="button" data-scenario="investor">Investor only</button>
+          <button type="button" data-scenario="startup">Startup only</button>
+          <button type="button" data-scenario="neither">Neither</button>
+        </div>
+        <p class="fine-print">Guided examples with scripted responses</p>
+      </section>
+      <section id="messages" class="messages" aria-label="Conversation" aria-live="polite" aria-relevant="additions"></section>
+    </main>
+    <footer class="composer-wrap">
+      <form id="composer" class="composer">
+        <label for="message" class="sr-only">Ask about this move</label>
+        <div class="composer-row"><input id="message" name="message" maxlength="1000" placeholder="Ask why, review evidence, or plan a test…" autocomplete="off" required><button id="send-message" class="primary" type="submit" aria-label="Send" title="Send"><span aria-hidden="true">↑</span></button><button id="stop-response" type="button" aria-label="Stop" title="Stop response" hidden><span aria-hidden="true">■</span></button></div>
+      </form>
+      <p id="session-status" class="fine-print" role="status">Plans and this conversation stay in this browser.</p>
+    </footer>
+    </div>
+  </div>
+  <dialog id="history-dialog" aria-labelledby="history-title"><div class="history-heading"><h2 id="history-title">Chat history</h2><button id="history-close" type="button">Close</button></div><p class="fine-print">Recent chats saved in this browser</p><div id="history-list"></div></dialog>
+  <script src="demo-data.js"></script>
+  <script src="rules.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@openuidev/browser-bundle@0.2.1/dist/openui-bundle.min.js"></script>
+  <script src="chat.js"></script>
+</body>
+</html>
