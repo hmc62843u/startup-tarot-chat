@@ -35,6 +35,8 @@ Responses appear progressively. **Stop** preserves the delivered portion, includ
 
 ## Conversation-first prototype
 
+[Watch the 30-second side-by-side comparison](https://wpatent.com/startup-tarot.htm#comparison-video) of the browsing-first app and conversational prototype. Actual screen captures, silent captions, and explicit data differences. [Video files and posting notes](social/2026-11-03-side-by-side/POST.md).
+
 [Design approach and walkthrough](CONVERSATION_DESIGN.md) records the OpenUI references, interaction decisions and remaining evaluation. Customer access selects an authored reservation or recruitment proposal. Evidence availability remains a separate constraint; no records are invented to support the branch. These controls and the plan editor are application-owned HTML alongside streamed OpenUI response cards. This iteration retains the pinned renderer and does not adopt newer OpenUI APIs.
 
 ## Development
