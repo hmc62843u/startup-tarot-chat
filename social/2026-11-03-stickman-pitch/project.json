@@ -1,0 +1,996 @@
+{
+ "version": 1,
+ "style": "B1",
+ "width": 1080,
+ "height": 1920,
+ "fps": 30,
+ "voice": {
+  "path": "audio/narration.wav",
+  "lead": 0.15,
+  "tail": 0.35
+ },
+ "captions": [
+  {
+   "start": 0.35,
+   "end": 2.02,
+   "text": "You've pitched forty investors."
+  },
+  {
+   "start": 2.41,
+   "end": 3.53,
+   "text": "Most never wrote back."
+  },
+  {
+   "start": 3.9,
+   "end": 5.3,
+   "text": "Wrong-fit funders."
+  },
+  {
+   "start": 5.49,
+   "end": 6.4,
+   "text": "Vague advice."
+  },
+  {
+   "start": 6.6,
+   "end": 7.76,
+   "text": "No clear next step."
+  },
+  {
+   "start": 8.36,
+   "end": 9.35,
+   "text": "Startup Tarot compares"
+  },
+  {
+   "start": 9.35,
+   "end": 10.4,
+   "text": "your startup"
+  },
+  {
+   "start": 10.4,
+   "end": 11.55,
+   "text": "with real investor criteria"
+  },
+  {
+   "start": 11.55,
+   "end": 12.65,
+   "text": "and dated examples."
+  },
+  {
+   "start": 12.85,
+   "end": 14.52,
+   "text": "See where you fit,"
+  },
+  {
+   "start": 14.97,
+   "end": 15.94,
+   "text": "where you don't,"
+  },
+  {
+   "start": 16.18,
+   "end": 16.92,
+   "text": "and what evidence"
+  },
+  {
+   "start": 17.24,
+   "end": 19.21,
+   "text": "would close the gap."
+  },
+  {
+   "start": 19.74,
+   "end": 21.12,
+   "text": "Then get one small,"
+  },
+  {
+   "start": 21.27,
+   "end": 22.68,
+   "text": "evidence-backed experiment:"
+  },
+  {
+   "start": 23.04,
+   "end": 24.14,
+   "text": "your next move."
+  },
+  {
+   "start": 24.59,
+   "end": 26.25,
+   "text": "It's free and runs in your browser."
+  },
+  {
+   "start": 26.78,
+   "end": 27.31,
+   "text": "Try the demo."
+  }
+ ],
+ "shots": [
+  {
+   "start": 0,
+   "end": 3.75,
+   "layers": [
+    {
+     "type": "text",
+     "text": "40 PITCHES.",
+     "x": 110,
+     "y": 300,
+     "size": 130,
+     "bold": true
+    },
+    {
+     "type": "text",
+     "text": "0 REPLIES.",
+     "x": 110,
+     "y": 470,
+     "size": 130,
+     "bold": true,
+     "color": "#E5463B",
+     "from": 2.3,
+     "keys": [
+      {
+       "t": 2.3,
+       "alpha": 0,
+       "y": 500
+      },
+      {
+       "t": 2.6,
+       "alpha": 1,
+       "y": 470
+      }
+     ]
+    },
+    {
+     "type": "image",
+     "path": "art/envelope.png",
+     "x": 860,
+     "y": 980,
+     "w": 170,
+     "to": 2.2,
+     "keys": [
+      {
+       "t": 0.2,
+       "y": 1000,
+       "alpha": 1
+      },
+      {
+       "t": 2.1,
+       "y": 640,
+       "x": 980,
+       "alpha": 0
+      }
+     ]
+    },
+    {
+     "type": "image",
+     "path": "art/envelope.png",
+     "x": 760,
+     "y": 1040,
+     "w": 140,
+     "to": 2.2,
+     "keys": [
+      {
+       "t": 0.7,
+       "y": 1040,
+       "alpha": 1
+      },
+      {
+       "t": 2.2,
+       "y": 720,
+       "x": 640,
+       "alpha": 0
+      }
+     ]
+    },
+    {
+     "type": "image",
+     "path": "art/founder-laptop.png",
+     "x": 70,
+     "y": 820,
+     "w": 1140,
+     "keys": [
+      {
+       "t": 0,
+       "y": 800
+      },
+      {
+       "t": 2.4,
+       "y": 820
+      },
+      {
+       "t": 3.75,
+       "y": 836
+      }
+     ]
+    },
+    {
+     "type": "underline",
+     "x": 110,
+     "y": 600,
+     "w": 640,
+     "color": "#E5463B",
+     "from": 2.7,
+     "keys": [
+      {
+       "t": 2.7,
+       "progress": 0
+      },
+      {
+       "t": 3.1,
+       "progress": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "start": 3.75,
+   "end": 8.25,
+   "layers": [
+    {
+     "type": "image",
+     "path": "art/signposts.png",
+     "x": 500,
+     "y": 760,
+     "w": 700,
+     "keys": [
+      {
+       "t": 0,
+       "angle": -0.03
+      },
+      {
+       "t": 1.5,
+       "angle": 0.03
+      },
+      {
+       "t": 3,
+       "angle": -0.02
+      },
+      {
+       "t": 4.5,
+       "angle": 0.01
+      }
+     ]
+    },
+    {
+     "type": "image",
+     "path": "art/founder-confused.png",
+     "x": 60,
+     "y": 900,
+     "w": 620,
+     "keys": [
+      {
+       "t": 0,
+       "angle": -0.05
+      },
+      {
+       "t": 1.6,
+       "angle": 0.05
+      },
+      {
+       "t": 3,
+       "angle": -0.04
+      },
+      {
+       "t": 4.5,
+       "angle": 0.02
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": "WRONG FIT.",
+     "x": 110,
+     "y": 260,
+     "size": 112,
+     "bold": true,
+     "color": "#E5463B",
+     "keys": [
+      {
+       "t": 0.1,
+       "alpha": 0
+      },
+      {
+       "t": 0.35,
+       "alpha": 1
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": "VAGUE ADVICE.",
+     "x": 110,
+     "y": 410,
+     "size": 112,
+     "bold": true,
+     "from": 1.7,
+     "keys": [
+      {
+       "t": 1.7,
+       "alpha": 0
+      },
+      {
+       "t": 1.95,
+       "alpha": 1
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": "NO NEXT STEP.",
+     "x": 110,
+     "y": 560,
+     "size": 112,
+     "bold": true,
+     "color": "#24395E",
+     "from": 2.8,
+     "keys": [
+      {
+       "t": 2.8,
+       "alpha": 0
+      },
+      {
+       "t": 3.05,
+       "alpha": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "start": 8.25,
+   "end": 12.75,
+   "layers": [
+    {
+     "type": "text",
+     "text": "STARTUP TAROT",
+     "x": 110,
+     "y": 280,
+     "size": 128,
+     "bold": true,
+     "color": "#24395E"
+    },
+    {
+     "type": "underline",
+     "x": 110,
+     "y": 410,
+     "w": 860,
+     "color": "#F2B92E",
+     "keys": [
+      {
+       "t": 0.3,
+       "progress": 0
+      },
+      {
+       "t": 0.9,
+       "progress": 1
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": "real investor criteria",
+     "x": 110,
+     "y": 520,
+     "size": 84,
+     "from": 2.1,
+     "keys": [
+      {
+       "t": 2.1,
+       "alpha": 0
+      },
+      {
+       "t": 2.4,
+       "alpha": 1
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": "+ dated startup examples",
+     "x": 110,
+     "y": 630,
+     "size": 84,
+     "color": "#3E9B4F",
+     "from": 3.2,
+     "keys": [
+      {
+       "t": 3.2,
+       "alpha": 0
+      },
+      {
+       "t": 3.5,
+       "alpha": 1
+      }
+     ]
+    },
+    {
+     "type": "image",
+     "path": "art/founder-card.png",
+     "x": 20,
+     "y": 860,
+     "w": 760
+    },
+    {
+     "type": "image",
+     "path": "art/tarot-card.png",
+     "x": 640,
+     "y": 1200,
+     "w": 330,
+     "keys": [
+      {
+       "t": 0,
+       "x": 560,
+       "y": 1080,
+       "angle": -0.5,
+       "alpha": 0
+      },
+      {
+       "t": 0.5,
+       "alpha": 1
+      },
+      {
+       "t": 1.4,
+       "x": 640,
+       "y": 1200,
+       "angle": 0.08
+      },
+      {
+       "t": 4.5,
+       "angle": 0.02
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "start": 12.75,
+   "end": 19.5,
+   "layers": [
+    {
+     "type": "text",
+     "text": "WHERE YOU FIT",
+     "x": 110,
+     "y": 260,
+     "size": 112,
+     "bold": true,
+     "color": "#3E9B4F",
+     "to": 2.1
+    },
+    {
+     "type": "text",
+     "text": "WHERE YOU DON'T",
+     "x": 110,
+     "y": 260,
+     "size": 112,
+     "bold": true,
+     "color": "#E5463B",
+     "from": 2.1,
+     "to": 3.35
+    },
+    {
+     "type": "text",
+     "text": "WHAT CLOSES",
+     "x": 110,
+     "y": 260,
+     "size": 112,
+     "bold": true,
+     "color": "#24395E",
+     "from": 3.35
+    },
+    {
+     "type": "text",
+     "text": "THE GAP",
+     "x": 110,
+     "y": 400,
+     "size": 112,
+     "bold": true,
+     "color": "#24395E",
+     "from": 4.5,
+     "keys": [
+      {
+       "t": 4.5,
+       "alpha": 0
+      },
+      {
+       "t": 4.8,
+       "alpha": 1
+      }
+     ]
+    },
+    {
+     "type": "image",
+     "path": "art/founder-pointing.png",
+     "x": -40,
+     "y": 1000,
+     "w": 560,
+     "keys": [
+      {
+       "t": 0,
+       "angle": 0
+      },
+      {
+       "t": 0.3,
+       "angle": 0.03
+      },
+      {
+       "t": 6.75,
+       "angle": 0
+      }
+     ]
+    },
+    {
+     "type": "image",
+     "path": "art/checklist.png",
+     "x": 500,
+     "y": 760,
+     "w": 520
+    },
+    {
+     "type": "image",
+     "path": "art/mark-tick.png",
+     "x": 545,
+     "y": 840,
+     "w": 90,
+     "from": 0.15,
+     "keys": [
+      {
+       "t": 0.15,
+       "alpha": 0,
+       "w": 40
+      },
+      {
+       "t": 0.4,
+       "alpha": 1,
+       "w": 90
+      }
+     ]
+    },
+    {
+     "type": "image",
+     "path": "art/mark-tick.png",
+     "x": 545,
+     "y": 950,
+     "w": 90,
+     "from": 0.9,
+     "keys": [
+      {
+       "t": 0.9,
+       "alpha": 0,
+       "w": 40
+      },
+      {
+       "t": 1.15,
+       "alpha": 1,
+       "w": 90
+      }
+     ]
+    },
+    {
+     "type": "image",
+     "path": "art/mark-cross.png",
+     "x": 545,
+     "y": 1060,
+     "w": 90,
+     "from": 2.25,
+     "keys": [
+      {
+       "t": 2.25,
+       "alpha": 0,
+       "w": 40
+      },
+      {
+       "t": 2.5,
+       "alpha": 1,
+       "w": 90
+      }
+     ]
+    },
+    {
+     "type": "image",
+     "path": "art/mark-question.png",
+     "x": 545,
+     "y": 1170,
+     "w": 90,
+     "from": 3.5,
+     "keys": [
+      {
+       "t": 3.5,
+       "alpha": 0,
+       "w": 40
+      },
+      {
+       "t": 3.75,
+       "alpha": 1,
+       "w": 90
+      }
+     ]
+    },
+    {
+     "type": "image",
+     "path": "art/mark-question.png",
+     "x": 545,
+     "y": 1280,
+     "w": 90,
+     "from": 4,
+     "keys": [
+      {
+       "t": 4,
+       "alpha": 0,
+       "w": 40
+      },
+      {
+       "t": 4.25,
+       "alpha": 1,
+       "w": 90
+      }
+     ]
+    },
+    {
+     "type": "arrow",
+     "points": [
+      [
+       600,
+       1450
+      ],
+      [
+       760,
+       1560
+      ],
+      [
+       900,
+       1420
+      ]
+     ],
+     "color": "#F2B92E",
+     "from": 4.6,
+     "keys": [
+      {
+       "t": 4.6,
+       "progress": 0
+      },
+      {
+       "t": 5.3,
+       "progress": 1
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "start": 19.5,
+   "end": 24.4,
+   "layers": [
+    {
+     "type": "text",
+     "text": "ONE SMALL",
+     "x": 130,
+     "y": 300,
+     "size": 140,
+     "bold": true
+    },
+    {
+     "type": "text",
+     "text": "EXPERIMENT.",
+     "x": 130,
+     "y": 470,
+     "size": 140,
+     "bold": true,
+     "color": "#3E9B4F",
+     "from": 1.75,
+     "keys": [
+      {
+       "t": 1.75,
+       "alpha": 0,
+       "y": 500
+      },
+      {
+       "t": 2.05,
+       "alpha": 1,
+       "y": 470
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": "= YOUR NEXT MOVE",
+     "x": 130,
+     "y": 660,
+     "size": 104,
+     "bold": true,
+     "color": "#24395E",
+     "from": 3.5,
+     "keys": [
+      {
+       "t": 3.5,
+       "alpha": 0
+      },
+      {
+       "t": 3.8,
+       "alpha": 1
+      }
+     ]
+    },
+    {
+     "type": "underline",
+     "x": 130,
+     "y": 790,
+     "w": 900,
+     "color": "#F2B92E",
+     "from": 3.8,
+     "keys": [
+      {
+       "t": 3.8,
+       "progress": 0
+      },
+      {
+       "t": 4.3,
+       "progress": 1
+      }
+     ]
+    },
+    {
+     "type": "image",
+     "path": "art/founder-walking.png",
+     "x": 60,
+     "y": 1150,
+     "w": 700,
+     "keys": [
+      {
+       "t": 0,
+       "x": 60
+      },
+      {
+       "t": 4.85,
+       "x": 300
+      }
+     ]
+    },
+    {
+     "type": "image",
+     "path": "art/sticky-note.png",
+     "x": 380,
+     "y": 1030,
+     "w": 300,
+     "keys": [
+      {
+       "t": 0,
+       "x": 380,
+       "y": 1060,
+       "angle": -0.08,
+       "alpha": 0
+      },
+      {
+       "t": 0.4,
+       "alpha": 1,
+       "y": 1030
+      },
+      {
+       "t": 2.4,
+       "x": 500,
+       "angle": 0.06
+      },
+      {
+       "t": 4.85,
+       "x": 620,
+       "angle": -0.03
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "start": 24.4,
+   "end": 27.94,
+   "layers": [
+    {
+     "type": "text",
+     "text": "FREE.",
+     "x": 130,
+     "y": 280,
+     "size": 160,
+     "bold": true,
+     "color": "#E5463B"
+    },
+    {
+     "type": "text",
+     "text": "IN YOUR BROWSER.",
+     "x": 130,
+     "y": 450,
+     "size": 110,
+     "bold": true,
+     "from": 0.6,
+     "keys": [
+      {
+       "t": 0.6,
+       "alpha": 0
+      },
+      {
+       "t": 0.9,
+       "alpha": 1
+      }
+     ]
+    },
+    {
+     "type": "text",
+     "text": "TRY THE DEMO",
+     "x": 130,
+     "y": 600,
+     "size": 110,
+     "bold": true,
+     "color": "#3E9B4F",
+     "from": 2.35,
+     "keys": [
+      {
+       "t": 2.35,
+       "alpha": 0,
+       "y": 630
+      },
+      {
+       "t": 2.65,
+       "alpha": 1,
+       "y": 600
+      }
+     ]
+    },
+    {
+     "type": "arrow",
+     "points": [
+      [
+       900,
+       640
+      ],
+      [
+       1050,
+       700
+      ],
+      [
+       1080,
+       800
+      ]
+     ],
+     "color": "#3E9B4F",
+     "from": 2.6,
+     "keys": [
+      {
+       "t": 2.6,
+       "progress": 0
+      },
+      {
+       "t": 3.1,
+       "progress": 1
+      }
+     ]
+    },
+    {
+     "type": "image",
+     "path": "art/browser.png",
+     "x": 200,
+     "y": 830,
+     "w": 880,
+     "keys": [
+      {
+       "t": 0,
+       "y": 900,
+       "alpha": 0
+      },
+      {
+       "t": 0.35,
+       "y": 830,
+       "alpha": 1
+      }
+     ]
+    },
+    {
+     "type": "image",
+     "path": "art/founder-cheer.png",
+     "x": 380,
+     "y": 1430,
+     "w": 500,
+     "keys": [
+      {
+       "t": 0,
+       "y": 1450
+      },
+      {
+       "t": 1.2,
+       "y": 1420
+      },
+      {
+       "t": 2.4,
+       "y": 1450
+      },
+      {
+       "t": 3.5,
+       "y": 1425
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "sfx": [
+  {
+   "time": 0.3,
+   "kind": "paper",
+   "gain": 0.03
+  },
+  {
+   "time": 2.45,
+   "kind": "tap",
+   "gain": 0.03
+  },
+  {
+   "time": 3.95,
+   "kind": "pop",
+   "gain": 0.025
+  },
+  {
+   "time": 5.45,
+   "kind": "pop",
+   "gain": 0.025
+  },
+  {
+   "time": 6.55,
+   "kind": "pop",
+   "gain": 0.025
+  },
+  {
+   "time": 8.8,
+   "kind": "paper",
+   "gain": 0.03
+  },
+  {
+   "time": 9.65,
+   "kind": "chime",
+   "gain": 0.02
+  },
+  {
+   "time": 12.9,
+   "kind": "tap",
+   "gain": 0.03
+  },
+  {
+   "time": 13.65,
+   "kind": "tap",
+   "gain": 0.03
+  },
+  {
+   "time": 15,
+   "kind": "tap",
+   "gain": 0.03
+  },
+  {
+   "time": 16.25,
+   "kind": "pop",
+   "gain": 0.025
+  },
+  {
+   "time": 16.75,
+   "kind": "pop",
+   "gain": 0.025
+  },
+  {
+   "time": 19.8,
+   "kind": "paper",
+   "gain": 0.03
+  },
+  {
+   "time": 21.5,
+   "kind": "pop",
+   "gain": 0.025
+  },
+  {
+   "time": 23.1,
+   "kind": "chime",
+   "gain": 0.02
+  },
+  {
+   "time": 24.6,
+   "kind": "pop",
+   "gain": 0.025
+  },
+  {
+   "time": 26.8,
+   "kind": "chime",
+   "gain": 0.02
+  }
+ ],
+ "captionSize": 64
+}

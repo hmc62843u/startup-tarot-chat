@@ -1,0 +1,71 @@
+1
+00:00:00,350 --> 00:00:02,020
+You've pitched forty investors.
+
+2
+00:00:02,410 --> 00:00:03,530
+Most never wrote back.
+
+3
+00:00:03,900 --> 00:00:05,300
+Wrong-fit funders.
+
+4
+00:00:05,490 --> 00:00:06,400
+Vague advice.
+
+5
+00:00:06,600 --> 00:00:07,760
+No clear next step.
+
+6
+00:00:08,360 --> 00:00:09,350
+Startup Tarot compares
+
+7
+00:00:09,350 --> 00:00:10,400
+your startup
+
+8
+00:00:10,400 --> 00:00:11,550
+with real investor criteria
+
+9
+00:00:11,550 --> 00:00:12,650
+and dated examples.
+
+10
+00:00:12,850 --> 00:00:14,520
+See where you fit,
+
+11
+00:00:14,970 --> 00:00:15,940
+where you don't,
+
+12
+00:00:16,180 --> 00:00:16,920
+and what evidence
+
+13
+00:00:17,240 --> 00:00:19,210
+would close the gap.
+
+14
+00:00:19,740 --> 00:00:21,120
+Then get one small,
+
+15
+00:00:21,270 --> 00:00:22,680
+evidence-backed experiment:
+
+16
+00:00:23,040 --> 00:00:24,140
+your next move.
+
+17
+00:00:24,590 --> 00:00:26,250
+It's free and runs in your browser.
+
+18
+00:00:26,780 --> 00:00:27,310
+Try the demo.
