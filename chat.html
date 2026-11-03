@@ -17,11 +17,11 @@
       <span class="rail-note">Demo</span>
     </nav>
     <div class="chat-stage">
-      <header class="app-header"><span class="app-title">Startup Tarot</span><span class="demo-label">Fictional records · Demo stream</span></header>
+      <header class="app-header"><span class="app-title">Startup Tarot</span><button id="working-plan" type="button">Working plan</button><span class="demo-label">Fictional records · Scripted conversation</span></header>
       <main id="chat-scroll" aria-label="Chat workspace">
       <section class="welcome" aria-labelledby="welcome-title">
-        <h1 id="welcome-title">What would you like to explore?</h1>
-        <p>Explore a fictional marketplace at the idea stage, testing demand. Choose which evidence is available.</p>
+        <h1 id="welcome-title">Choose a small demand experiment</h1>
+        <p>Explore a fictional idea-stage marketplace. Answer a question, consider a proposal, inspect its evidence and shape a plan. Choose the demo evidence available:</p>
         <div class="scenarios" aria-label="Choose a fictional evidence case">
           <button type="button" data-scenario="both">Both connected</button>
           <button type="button" data-scenario="investor">Investor only</button>
@@ -44,6 +44,7 @@
   <dialog id="history-dialog" aria-labelledby="history-title"><div class="history-heading"><h2 id="history-title">Chat history</h2><button id="history-close" type="button">Close</button></div><p class="fine-print">Recent chats saved in this browser</p><div id="history-list"></div></dialog>
   <script src="demo-data.js"></script>
   <script src="rules.js"></script>
+  <script src="conversation.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@openuidev/browser-bundle@0.2.1/dist/openui-bundle.min.js"></script>
   <script src="chat.js"></script>
 </body>

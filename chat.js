@@ -14,7 +14,7 @@
     if (saved && saved.version === 1 && Array.isArray(saved.messages)) {
       session.selected = data.cases[saved.selected] ? saved.selected : 'both';
       session.messages = saved.messages.filter(function(m) {
-        return m && ['user','move','why','evidence','plan','help'].includes(m.kind) && data.cases[m.case] && (m.kind !== 'user' || typeof m.text === 'string');
+        return m && ['user','move','why','evidence','plan','help','clarify'].includes(m.kind) && data.cases[m.case] && (m.kind !== 'user' || typeof m.text === 'string');
       }).slice(-60);
       session.messages.forEach(function(m) {
         // A refresh must never silently complete a reply that was interrupted.
@@ -26,7 +26,7 @@
       });
       if(Array.isArray(saved.archives)) {
         session.archives=saved.archives.filter(function(a){return a && typeof a.id==='string' && data.cases[a.selected] && Array.isArray(a.messages);}).slice(0,10).map(function(a){
-          return {id:a.id,selected:a.selected,messages:a.messages.filter(function(m){return m && ['user','move','why','evidence','plan','help'].includes(m.kind) && data.cases[m.case] && (m.kind!=='user'||typeof m.text==='string');}).slice(-60).map(function(m){if(m.status==='streaming')m.status='stopped';return m;})};
+          return {id:a.id,selected:a.selected,messages:a.messages.filter(function(m){return m && ['user','move','why','evidence','plan','help','clarify'].includes(m.kind) && data.cases[m.case] && (m.kind!=='user'||typeof m.text==='string');}).slice(-60).map(function(m){if(m.status==='streaming')m.status='stopped';return m;})};
         });
       }
     }
@@ -42,7 +42,11 @@
     if (text !== undefined) node.textContent = text;
     return node;
   }
-  function resultFor(key) { return TarotRules.evaluate(data.situation, data.cases[key], data); }
+  function currentApproach() {
+    var last=session.messages.slice().reverse().find(function(m){return m.approach;});
+    return last ? last.approach : undefined;
+  }
+  function resultFor(key,approach) { return TarotConversation.propose(TarotRules.evaluate(data.situation,data.cases[key],data),approach); }
   function buttons(selected) {
     document.querySelectorAll('[data-scenario]').forEach(function(b) { b.setAttribute('aria-pressed',String(b.dataset.scenario === selected)); });
   }
@@ -74,7 +78,7 @@
     document.getElementById('history-dialog').showModal();
   }
   function setBusy(busy) {
-    document.querySelectorAll('[data-scenario], .followups button, #send-message').forEach(function(b) { b.disabled = busy; });
+    document.querySelectorAll('[data-scenario], .followups button, [data-rethink], #working-plan, #send-message').forEach(function(b) { b.disabled = busy; });
     document.getElementById('send-message').hidden = busy;
     document.getElementById('stop-response').hidden = !busy;
   }
@@ -155,18 +159,19 @@
     // Fixture playback, explicitly labelled in the UI; no model or fake thinking.
     timer=setTimeout(pump,120);
   }
-  function followups(container,key) {
+  function followups(container,key,kind) {
     var row = el('div','followups');
-    [['Why this move?','why'],['Review evidence','evidence'],['Make a plan','plan']].forEach(function(pair) {
+    var pairs=kind==='clarify' ? [['I can reach potential customers','reachable'],['I cannot reach them yet','recruit']] : kind==='evidence' ? [['Draft a plan','plan'],['Change my constraint','clarify']] : [['Inspect evidence','evidence'],['Draft a plan','plan'],['That will not work for me','clarify']];
+    pairs.forEach(function(pair) {
       var b = el('button','',pair[0]); b.type = 'button';
-      b.addEventListener('click',function(){request(pair[0],pair[1],key);});row.append(b);
+      b.addEventListener('click',function(){var approach=['reachable','recruit'].includes(pair[1]) ? pair[1] : undefined;request(pair[0],approach?'move':pair[1],key,approach);});row.append(b);
     });
     container.append(row);
   }
   function planForm(container,key,result) {
     var form = el('form','plan-form');
     form.dataset.plan = key;
-    form.append(el('h2','','Plan a small test'));
+    form.append(el('h2','','Your working plan'),el('p','fine-print','Edit locally, then save to accept changes. Earlier proposals keep their original context.'));
     var plan = session.plans[key] || {action:result.action,evidence:'',date:''};
     [['What will you try?','action','textarea'],['What will you look for?','evidence','textarea'],['When will you review it?','date','input']].forEach(function(field) {
       var label=el('label','',field[0]);var input=el(field[2]);input.name=field[1];
@@ -176,9 +181,20 @@
     });
     var actions=el('div','plan-actions');var save=el('button','primary','Save plan');save.type='submit';
     var status=el('span','fine-print',session.plans[key]?'Saved plan loaded.':'');status.setAttribute('role','status');
-    actions.append(save,status);form.append(actions);
+    var use=el('button','','Use latest proposal');use.type='button';
+    use.addEventListener('click',function(){form.elements.namedItem('action').value=resultFor(key,currentApproach()).action;status.textContent='Proposal applied to draft. Review your evidence and save to accept.';});
+    var rethink=el('button','','Rethink this proposal');rethink.type='button';
+    rethink.dataset.rethink='true';
+    rethink.addEventListener('click',function(){request('Rethink this proposal','clarify',key);});
+    actions.append(save,use,rethink,status);form.append(actions);
     form.addEventListener('input',function(){status.textContent='Unsaved changes.';});
-    form.addEventListener('submit',function(event){event.preventDefault();session.plans[key]={action:form.elements.namedItem('action').value,evidence:form.elements.namedItem('evidence').value,date:form.elements.namedItem('date').value};if(persist())status.textContent='Plan saved in this browser.';else status.textContent='Plan could not be saved.';});
+    form.addEventListener('submit',function(event){event.preventDefault();session.plans[key]={action:form.elements.namedItem('action').value,evidence:form.elements.namedItem('evidence').value,date:form.elements.namedItem('date').value};if(persist()) {
+      document.querySelectorAll('form[data-plan]').forEach(function(other){
+        if(other===form || other.dataset.plan!==key)return;
+        ['action','evidence','date'].forEach(function(name){other.elements.namedItem(name).value=session.plans[key][name];});
+        other.querySelector('[role=status]').textContent='Updated to the latest saved plan.';
+      });status.textContent='Plan saved in this browser.';
+    } else status.textContent='Plan could not be saved.';});
     container.append(form);
   }
   function display(message, stream) {
@@ -187,22 +203,27 @@
     if(message.kind==='user'){article.append(el('p','',message.text));messages.append(article);return article;}
     article.append(el('div','speaker','Startup Tarot · '+data.cases[message.case].label));
     messages.append(article);
-    var result=resultFor(message.case);
+    var result=resultFor(message.case,message.approach);
     if(message.kind==='plan'){planForm(article,message.case,result);return article;}
     var output=el('div','response');article.append(output);
     var subtitle='Fictional records · '+data.cases[message.case].label;
-    function completed() {followups(article,message.case);}
-    if(message.kind==='move') {
-      renderOpenUI(output,result.title,subtitle,[{text:result.action},{title:'Evidence available',text:(result.investor?'Investor interest is documented in the demo. ':'No investor interest is documented in this case. ')+(result.snapshot?'A startup snapshot is available.':'No startup snapshot is available.')},{title:'Why it appears',text:result.rationale}],message,stream,completed);
+    function completed() {followups(article,message.case,message.kind);}
+    if(message.kind==='clarify') {
+      renderOpenUI(output,'Can you reach potential customers this week?','One question before choosing a test',[
+        {text:'For this idea-stage marketplace, customer access changes which next step is practical.'},
+        {text:'Choose an answer below. This scripted prototype supports two constraints; it does not interpret arbitrary founder descriptions.'}
+      ],message,stream,completed);
+    } else if(message.kind==='move') {
+      renderOpenUI(output,result.title,subtitle,[{text:result.action},{title:'Evidence available',text:(result.investor?'Investor interest is documented in the demo. ':'No investor interest is documented in this case. ')+(result.snapshot?'A startup snapshot is available.':'No startup snapshot is available.')},{title:'Why this step',text:result.constraintReason}],message,stream,completed);
     } else if(message.kind==='why') {
-      renderOpenUI(output,'Why this move appears',subtitle,[{text:'Your demo situation: marketplace · idea stage · demand question.'},{text:result.rationale},{title:'Rule used',text:result.ruleId || 'No matching rule.'},{text:'Relevance does not establish funding, endorsement or what caused an outcome.'}],message,stream,completed);
+      renderOpenUI(output,'Why this move appears',subtitle,[{text:'Your demo situation: marketplace · idea stage · demand question.'},{text:result.constraintReason},{text:result.rationale},{title:'Rule used',text:result.ruleId || 'No matching rule.'},{text:'Relevance does not establish funding, endorsement or what caused an outcome.'}],message,stream,completed);
     } else if(message.kind==='evidence') {
       var sections=[];
       if(result.investor) sections.push({title:result.investor.name,text:result.investor.evidence+' Source ID: '+result.investor.id+'. '+result.investor.source});
       else sections.push({title:'Investor evidence',text:'No matching investor interest is documented in this case.'});
       if(result.snapshot) sections.push({title:result.snapshot.name+' · '+result.snapshot.date,text:result.snapshot.evidence+' Source ID: '+result.snapshot.id+'. '+result.snapshot.source});
       else sections.push({title:'Startup evidence',text:'No supporting startup snapshot is available in this case.'});
-      sections.push({title:'Connection',text:result.rationale});
+      sections.push({title:'Connection',text:result.rationale});sections.push({title:'Proposal limits',text:result.constraintReason+' The constraint-based suggestion is authored for this demo, not a finding from these records.'});
       renderOpenUI(output,'Review the evidence',subtitle,sections,message,stream,completed);
     } else {
       renderOpenUI(output,'What would you like to explore?','Guided demo',[{text:'Choose a fictional evidence case above, or ask “why”, “evidence” or “plan”. The examples use a marketplace at the idea stage with a demand question.'},{text:'Free-form descriptions are not matched by a language model in this version.'}],message,stream,completed);
@@ -214,21 +235,23 @@
     if(session.messages.length>60) {session.messages=session.messages.slice(-60);redraw(message,stream);}
     else display(message,stream);
   }
-  function request(text,kind,key) {
+  function request(text,kind,key,approach) {
     if(activeRender)return;
     key=key || session.selected;
+    if((kind==='move' || kind==='plan') && !approach && !currentApproach())kind='clarify';
     session.selected=key;buttons(key);
     append({kind:'user',case:key,text:text.slice(0,1000)});
     updateShell();
-    append({kind:kind,case:key},kind!=='plan');persist();
+    append({kind:kind,case:key,approach:approach || currentApproach()},kind!=='plan');persist();
     scrollToLatest(true);
   }
   function redraw(liveMessage, stream) {roots.forEach(function(r){r.unmount();});roots=[];messages.replaceChildren();session.messages.forEach(function(m){display(m,m===liveMessage && stream);});buttons(session.selected);updateShell();scrollToLatest(true);}
-  document.querySelectorAll('[data-scenario]').forEach(function(button){button.addEventListener('click',function(){var key=button.dataset.scenario;request('Show the '+data.cases[key].label.toLowerCase()+' case for a marketplace at the idea stage, testing demand.','move',key);});});
+  document.querySelectorAll('[data-scenario]').forEach(function(button){button.addEventListener('click',function(){var key=button.dataset.scenario;request('Show the '+data.cases[key].label.toLowerCase()+' case for a marketplace at the idea stage, testing demand.','clarify',key);});});
   document.getElementById('composer').addEventListener('submit',function(event){
     event.preventDefault();if(activeRender)return;var input=document.getElementById('message');var text=input.value.trim();if(!text)return;input.value='';
     var lower=text.toLowerCase();var key=session.selected;var kind='help';
-    if(/\bneither\b/.test(lower)){key='neither';kind='move';}
+    if(/\b(change|cannot|rethink)\b/.test(lower)){kind='clarify';}
+    else if(/\bneither\b/.test(lower)){key='neither';kind='move';}
     else if(/\binvestor only\b/.test(lower)){key='investor';kind='move';}
     else if(/\bstartup only\b/.test(lower)){key='startup';kind='move';}
     else if(/\bboth\b/.test(lower)){key='both';kind='move';}
@@ -237,6 +260,12 @@
     else if(/\b(plan|test|experiment)\b/.test(lower))kind='plan';
     else if(/\b(marketplace|demand|reservation)\b/.test(lower))kind='move';
     request(text,kind,key);
+  });
+  document.getElementById('working-plan').addEventListener('click',function(){
+    if(activeRender)return;
+    var existing=Array.from(document.querySelectorAll('form[data-plan]')).reverse().find(function(f){return f.dataset.plan===session.selected;});
+    if(existing){existing.scrollIntoView({block:'center'});existing.elements.namedItem('action').focus();}
+    else request('Open my working plan','plan',session.selected);
   });
   document.getElementById('stop-response').addEventListener('click',function(){if(activeRender)activeRender.cancel();document.getElementById('message').focus();});
   document.getElementById('new-chat').addEventListener('click',function(){if(activeRender)activeRender.cancel();archiveCurrent();session.messages=[];session.selected='both';redraw();persist();document.getElementById('message').value='';document.getElementById('message').focus();scrollArea.scrollTop=0;});
