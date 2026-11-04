@@ -1,0 +1,63 @@
+1
+00:00:00,310 --> 00:00:03,670
+Every cohort needs current investor and startup research.
+
+2
+00:00:03,990 --> 00:00:06,260
+Keeping it up to date by hand is slow.
+
+3
+00:00:06,740 --> 00:00:10,170
+With Startup Tarot, one operator keeps that research current,
+
+4
+00:00:10,310 --> 00:00:12,400
+with Codex doing the careful groundwork.
+
+5
+00:00:12,930 --> 00:00:15,400
+Founders get a ready-to-open copy of the app
+
+6
+00:00:15,400 --> 00:00:17,710
+to choose their next small experiment.
+
+7
+00:00:18,400 --> 00:00:19,510
+People stay in charge.
+
+8
+00:00:19,960 --> 00:00:21,740
+Every release needs human approval,
+
+9
+00:00:21,870 --> 00:00:24,380
+and nothing is published or sent automatically.
+
+10
+00:00:24,980 --> 00:00:27,300
+Private contact data stays out of releases,
+
+11
+00:00:27,300 --> 00:00:28,950
+and every change is versioned,
+
+12
+00:00:28,950 --> 00:00:30,770
+so earlier versions can be restored.
+
+13
+00:00:31,550 --> 00:00:34,620
+We've demonstrated it with synthetic data on a local setup.
+
+14
+00:00:34,830 --> 00:00:37,190
+It hasn't been tried with OpenFor's data yet.
+
+15
+00:00:37,750 --> 00:00:40,020
+We're asking for one operator and a small,
+
+16
+00:00:40,150 --> 00:00:42,060
+authorized dataset to run a pilot.
